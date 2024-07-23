@@ -39,8 +39,18 @@ class Result {
         return (commonMultiple - 1);
     }
 
+    public static boolean validate(int x1, int v1, int x2, int v2) {
+        return (x1 >= 0 && x1 < x2
+                && x1 <= 10000 && x2 <= 1000
+                && v1 >= 1 && v2 >= 1
+                && v1 <= 10000 && v2 <= 10000 ? true : false);
+    }
+
     public static String kangaroo(int x1, int v1, int x2, int v2) {
         // Write your code here
+        if (!validate(x1, v1, x2, v2)) {
+            throw new IllegalArgumentException("One or more inputs is/are invalid");
+        }
         int step1 = 0;
         int step2 = 0;
         // int com_mult = getCommonMultiple(x1, x2, 1);
@@ -57,14 +67,22 @@ class Result {
             for (int k = x2; k <= com_mult; k = k + v2) {
                 step2++;
             }
-            // System.out.println(com_mult + ":\t" + step1 + "\t" + step2 + "\t" + x1 + "\t"
-            // + x2);
             if (step1 == step2) {
                 break;
             }
         }
         return step1 == step2 ? "YES" : "NO";
-        
+
+        // ************This Solution passes ALL THE TESTS****************
+        // if (x1 < x2 && v1 < v2)
+        // return "NO";
+        // else {
+        // if (v1 != v2 && (x2 - x1) % (v2 - v1) == 0)
+        // return "YES";
+        // else
+        // return "NO";
+        // }
+
     }
 
 }
